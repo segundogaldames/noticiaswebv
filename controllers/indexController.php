@@ -13,6 +13,7 @@ class indexController extends Controller
 	{
 		$this->getMessages();
 
+		$this->_view->assign('title','Página de Inicio');
 		$this->_view->render('index');
 	}
 }
