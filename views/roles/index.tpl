@@ -19,8 +19,8 @@
                             <td>{$model.id}</td>
                             <td>{$model.nombre}</td>
                             <td>
-                                <a href="{$_layoutParams.root}roles/show/" class="btn btn-success btn-sm">Ver</a>
-                                <a href="{$_layoutParams.root}roles/edit/" class="btn btn-warning btn-sm">Editar</a>
+                                <a href="{$_layoutParams.root}roles/show/{$model.id}" class="btn btn-success btn-sm">Ver</a>
+                                <a href="{$_layoutParams.root}roles/edit/{$model.id}" class="btn btn-warning btn-sm">Editar</a>
                             </td>
                         </tr>
                     {/foreach}
