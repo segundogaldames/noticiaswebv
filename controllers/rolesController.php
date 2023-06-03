@@ -15,7 +15,7 @@ class rolesController extends Controller
         $this->_view->assign('title','Roles');
         $this->_view->assign('asunto','Lista de Roles');
         $this->_view->assign('notice','No hay roles disponibles');
-        $this->_view->assign('roles', Role::select('id','nombre')->get());//select id, nombre from roles
+        $this->_view->assign('roles', Role::select('id','nombre')->orderBy('id','desc')->get());//select id, nombre from roles
         $this->_view->render('index');
     }
 

@@ -24,7 +24,7 @@
             </button>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{$_layoutParams.root}roles">Roles</a></li>
-              <li><a class="dropdown-item" href="#">Usuarios</a></li>
+              <li><a class="dropdown-item" href="{$_layoutParams.root}usuarios">Usuarios</a></li>
             </ul>
           </div>
           <nav class="nav flex-column">
