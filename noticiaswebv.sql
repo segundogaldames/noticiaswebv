@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.32, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.33, for Linux (x86_64)
 --
 -- Host: localhost    Database: noticiaswebv
 -- ------------------------------------------------------
--- Server version	8.0.32-0ubuntu0.20.04.2
+-- Server version	8.0.33-0ubuntu0.22.04.2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,7 +28,7 @@ CREATE TABLE `roles` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,8 +37,39 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'Administrador','2023-05-05 22:53:58','2023-05-05 22:53:58');
+INSERT INTO `roles` VALUES (1,'Administradora','2023-06-01 15:28:36','2023-06-02 20:40:20'),(2,'Otro rol','2023-06-02 20:40:36','2023-06-02 20:40:36'),(3,'Periodista','2023-06-09 21:12:32','2023-06-09 21:12:32'),(4,'Editor','2023-06-09 21:12:43','2023-06-09 21:12:43');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuarios`
+--
+
+DROP TABLE IF EXISTS `usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usuarios` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `rut` varchar(255) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `activo` int NOT NULL,
+  `role_id` int NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'1234-2','Juan Perez','juan@juan.cl','1234',1,1,'2023-06-02 21:07:25','2023-06-02 21:07:25'),(2,'22344563-7','Gabriela Morales','gabriela@gmail.com','081fc56519489f782f00a3976c862e083a62d1b7b52afe968b72fa75c9600f4a4fa7f1352990454b8cab4425229b3c0e3b587430c9543f3625bb5dde41dac481',1,1,'2023-06-02 21:41:32','2023-06-02 21:41:32'),(3,'23546789-5','Ricardo Meruane','rmeruane@gmail.com','081fc56519489f782f00a3976c862e083a62d1b7b52afe968b72fa75c9600f4a4fa7f1352990454b8cab4425229b3c0e3b587430c9543f3625bb5dde41dac481',2,3,'2023-06-02 21:47:00','2023-06-09 21:16:21'),(4,'25678900-0','Dino Gordillo','dino@gmail.com','081fc56519489f782f00a3976c862e083a62d1b7b52afe968b72fa75c9600f4a4fa7f1352990454b8cab4425229b3c0e3b587430c9543f3625bb5dde41dac481',1,4,'2023-06-09 21:18:06','2023-06-09 21:18:06');
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +81,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-05 22:57:16
+-- Dump completed on 2023-06-09 21:23:21
