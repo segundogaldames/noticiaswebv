@@ -26,6 +26,7 @@ class usuariosController extends Controller
 
         $this->_view->assign('title','Usuarios');
         $this->_view->assign('asunto','Nuevo Usuario');
+        $this->_view->assign('action', 'Crear');
         $this->_view->assign('process', "usuarios/store");
         $this->_view->assign('usuario', Session::get('data'));
         $this->_view->assign('roles', Role::select('id','nombre')->orderBy('nombre')->get());
@@ -84,45 +85,60 @@ class usuariosController extends Controller
 
     public function show($id = null)
     {
-        Validate::validateModel(Role::class, $id, 'error/error');
+        Validate::validateModel(Usuario::class, $id, 'error/error');
 
         $this->getMessages();
 
-        $this->_view->assign('title','Roles');
-        $this->_view->assign('asunto','Detalle Rol');
-        $this->_view->assign('role', Role::find(Filter::filterInt($id)));//select id, nombre from roles
+        $this->_view->assign('title','Usuarios');
+        $this->_view->assign('asunto','Detalle Usuario');
+        $this->_view->assign('usuario', Usuario::with('role')->find(Filter::filterInt($id)));//select id, nombre from roles
         $this->_view->render('show');
     }
 
     public function edit($id = null)
     {
-        Validate::validateModel(Role::class, $id, 'error/error');
+        Validate::validateModel(Usuario::class, $id, 'error/error');
 
         $this->getMessages();
 
-        $this->_view->assign('title','Roles');
-        $this->_view->assign('asunto','Editar Rol');
-        $this->_view->assign('process', "roles/update/{$id}");
-        $this->_view->assign('role', Role::find(Filter::filterInt($id)));
+        $this->_view->assign('title','Usuarios');
+        $this->_view->assign('asunto','Editar Usuario');
+        $this->_view->assign('action', 'Editar');
+        $this->_view->assign('process', "usuarios/update/{$id}");
+        $this->_view->assign('usuario', Usuario::with('role')->find(Filter::filterInt($id)));
+        $this->_view->assign('roles', Role::select('id','nombre')->orderBy('nombre')->get());
         $this->_view->assign('send', $this->encrypt($this->getForm()));
         $this->_view->render('edit');
     }
 
     public function update($id = null)
     {
-        Validate::validateModel(Role::class, $id, 'error/error');
+        Validate::validateModel(Usuario::class, $id, 'error/error');
         $this->validatePUT();
 
-        $this->validateForm("roles/update/{$id}",[
-            'nombre' => Filter::getText('nombre')
+        $this->validateForm("usuarios/edit/{$id}",[
+            'rut' => Filter::getText('rut'),
+            'nombre' => Filter::getText('nombre'),
+            'email' => $this->validateEmail(Filter::getPostParam('email')),
+            'activo' => Filter::getText('activo'),
+            'rol' => Filter::getText('rol')
         ]);
 
-        $rol = Role::find(Filter::filterInt($id));
-        $rol->nombre = Filter::getText('nombre');
-        $rol->save();
+        if (!$this->validateRut(Filter::getText('rut'))) {
+            Session::set('msg_error','El RUT ingresado no es válido');
+            $this->redirect('usuarios/create');
+        }
+
+        $usuario = Usuario::find(Filter::filterInt($id));
+        $usuario->rut = Filter::getText('rut');
+        $usuario->nombre = Filter::getText('nombre');
+        $usuario->email = Filter::getPostParam('email');
+        $usuario->activo = Filter::getInt('activo');
+        $usuario->role_id = Filter::getInt('rol');
+        $usuario->save();
 
         Session::destroy('data');
-        Session::set('msg_success', 'El rol se ha modificado correctamente');
-        $this->redirect('roles/show/' . $id);
+        Session::set('msg_success', 'El usuario se ha modificado correctamente');
+        $this->redirect('usuarios/show/' . $id);
     }
 }

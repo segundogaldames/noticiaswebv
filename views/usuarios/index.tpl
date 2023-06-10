@@ -4,6 +4,7 @@
             {$asunto}
             <a href="{$_layoutParams.root}usuarios/create" class="btn btn-outline-secondary">Nuevo Usuario</a>
         </h1>
+        {include file="../partials/_messages.tpl"}
         {if isset($usuarios) && count($usuarios)}
             <table class="table table-hover">
                 <thead>
@@ -25,9 +26,9 @@
                             <td>{$model.role.nombre}</td>
                             <td>
                                 {if $model.activo == 1}
-                                    Si
+                                    <span class="badge text-bg-success">Si</span>
                                 {else}
-                                    No
+                                    <span class="badge text-bg-warning">No</span>
                                 {/if}
                             </td>
                             <td>
