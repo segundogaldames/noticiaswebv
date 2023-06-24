@@ -79,7 +79,7 @@ class Helper
     #metodo que permite el acceso a un elemento a partir de un rol
     public static function getRolAdmin($role)
     {
-        if (Session::get('user_rol') == $role) {
+        if (Session::get('user_role') == $role) {
             return true;
         }
 

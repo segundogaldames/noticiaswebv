@@ -5,7 +5,7 @@ class rolesController extends Controller
 {
     public function __construct()
     {
-        $this->validateSession();
+        $this->validateAdmin();
         parent::__construct();
     }
 

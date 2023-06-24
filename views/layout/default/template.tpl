@@ -24,7 +24,9 @@
                 Usuarios
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{$_layoutParams.root}roles">Roles</a></li>
+                {if Helper::getRolAdmin('Administrador(a)')}
+                  <li><a class="dropdown-item" href="{$_layoutParams.root}roles">Roles</a></li>
+                {/if}
                 <li><a class="dropdown-item" href="{$_layoutParams.root}usuarios">Usuarios</a></li>
               </ul>
             </div>

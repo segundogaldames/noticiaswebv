@@ -11,6 +11,7 @@ class usuariosController extends Controller
 
     public function index()
     {
+        $this->validateAdminEditor();
         $this->getMessages();
 
         $this->_view->assign('title','Usuarios');
@@ -22,6 +23,7 @@ class usuariosController extends Controller
 
     public function create()
     {
+        $this->validateAdmin();
         $this->getMessages();
 
         $this->_view->assign('title','Usuarios');
@@ -36,6 +38,7 @@ class usuariosController extends Controller
 
     public function store()
     {
+        $this->validateAdmin();
         $this->validateForm('usuarios/create',[
             'rut' => Filter::getText('rut'),
             'nombre' => Filter::getText('nombre'),
@@ -85,6 +88,7 @@ class usuariosController extends Controller
 
     public function show($id = null)
     {
+        $this->validateAdminEditor();
         Validate::validateModel(Usuario::class, $id, 'error/error');
 
         $this->getMessages();
@@ -97,6 +101,7 @@ class usuariosController extends Controller
 
     public function edit($id = null)
     {
+        $this->validateAdmin();
         Validate::validateModel(Usuario::class, $id, 'error/error');
 
         $this->getMessages();
@@ -113,6 +118,7 @@ class usuariosController extends Controller
 
     public function update($id = null)
     {
+        $this->validateAdmin();
         Validate::validateModel(Usuario::class, $id, 'error/error');
         $this->validatePUT();
 

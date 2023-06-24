@@ -150,6 +150,20 @@ class Controller
 		}
 	}
 
+	protected function validateAdmin()
+	{
+		$this->validateSession();
+		Session::get('time');
+		$this->validateRol(['Administrador(a)']);
+	}
+
+	protected function validateAdminEditor()
+	{
+		$this->validateSession();
+		Session::get('time');
+		$this->validateRol(['Administrador(a)','Editor(a)']);
+	}
+
 	#metodo que permite dar accesos a un rol o a un grupo de ellos
 	#usado en controladores
 	protected function validateRol($roles){
@@ -162,7 +176,7 @@ class Controller
 			}
 		}
 
-		$this->redirect();
+		$this->redirect('error/denied');
 	}
 
 	#metodo que verifica la autenticacion de un usuario
